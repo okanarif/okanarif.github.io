@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okan Arif Güvenkaya | AI Research Engineer & Robotics Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #e5e5e5;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            color: #fff;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tab-button {
+            position: relative;
+            transition: all 0.3s;
+            color: #9ca3af;
+        }
+        
+        .tab-button.active {
+            color: #667eea;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s;
+        }
+        
+        .tab-button.active::after {
+            width: 100%;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .skill-tag {
+            transition: all 0.3s;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #e5e5e5;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(102, 126, 234, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            overflow-y: auto;
+        }
+        
+        .project-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <!-- Navigation -->
+    <nav class="bg-black/90 backdrop-blur-md shadow-lg border-b border-gray-800 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#" onclick="showTab('home')" class="text-2xl font-bold gradient-bg bg-clip-text text-transparent">OAG</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button onclick="showTab('home')" class="tab-button active px-3 py-2 text-sm font-medium">Home</button>
+                        <button onclick="showTab('about')" class="tab-button px-3 py-2 text-sm font-medium">About Me</button>
+                        <button onclick="showTab('research')" class="tab-button px-3 py-2 text-sm font-medium">Research</button>
+                        <button onclick="showTab('publications')" class="tab-button px-3 py-2 text-sm font-medium">Publications</button>
+                        <button onclick="showTab('projects')" class="tab-button px-3 py-2 text-sm font-medium">Projects</button>
+                        <button onclick="showTab('experience')" class="tab-button px-3 py-2 text-sm font-medium">Experience</button>
+                        <button onclick="showTab('skills')" class="tab-button px-3 py-2 text-sm font-medium">Skills</button>
+                        <button onclick="showTab('contact')" class="tab-button px-3 py-2 text-sm font-medium">Contact</button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-purple-400 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="showTab('home'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Home</button>
+                <button onclick="showTab('about'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">About Me</button>
+                <button onclick="showTab('research'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Research</button>
+                <button onclick="showTab('publications'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Publications</button>
+                <button onclick="showTab('projects'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Projects</button>
+                <button onclick="showTab('experience'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Experience</button>
+                <button onclick="showTab('skills'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Skills</button>
+                <button onclick="showTab('contact'); toggleMobileMenu()" class="block w-full text-left text-gray-400 hover:bg-gray-900 hover:text-purple-400 px-3 py-2 rounded-md text-base font-medium">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home-tab" class="tab-content active">
+        <div class="hero-overlay min-h-screen flex items-center relative">
+            <!-- Background Image - Drone Swarm -->
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2070" alt="Drone Swarm" class="w-full h-full object-cover opacity-40">
+            </div>
+            
+            <div class="hero-content w-full">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+                    <div class="text-center text-white">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Okan Arif Güvenkaya</h1>
+                        <p class="text-2xl md:text-3xl mb-4 text-purple-300 font-semibold">AI Research Engineer & Robotics Software Developer</p>
+                        <p class="text-xl mb-6 text-gray-300">M.Sc. in Mechatronics, Robotics and Biomechanical Engineering</p>
+                        <p class="text-lg mb-12 text-gray-400">Technical University of Munich</p>
+                        
+                        <div class="max-w-4xl mx-auto mb-12">
+                            <p class="text-xl leading-relaxed text-gray-200">
+                                Focusing on autonomous systems, UAV swarms, and optimization-based motion planning for intelligent multi-agent coordination.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-wrap justify-center gap-3 mb-12">
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">Autonomous Systems</span>
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">Swarm Robotics</span>
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">UAVs</span>
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">Path Planning</span>
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">Reinforcement Learning</span>
+                            <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50">Computer Vision</span>
+                        </div>
+                        
+                        <div class="flex justify-center space-x-8 mb-12">
+                            <a href="https://scholar.google.com" target="_blank" class="text-white hover:text-purple-400 transition transform hover:scale-110">
+                                <i class="fab fa-google text-4xl"></i>
+                            </a>
+                            <a href="https://github.com" target="_blank" class="text-white hover:text-purple-400 transition transform hover:scale-110">
+                                <i class="fab fa-github text-4xl"></i>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="text-white hover:text-purple-400 transition transform hover:scale-110">
+                                <i class="fab fa-linkedin text-4xl"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="flex justify-center gap-4">
+                            <button onclick="showTab('about')" class="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition transform hover:scale-105">
+                                Learn More
+                            </button>
+                            <button onclick="showTab('contact')" class="px-8 py-4 bg-transparent border-2 border-purple-600 hover:bg-purple-600/20 text-white font-semibold rounded-lg transition">
+                                Get in Touch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about-tab" class="tab-content min-h-screen py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-5xl font-bold mb-16 section-title">About Me</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <p class="text-xl text-gray-300 leading-relaxed">
+                        I'm an <span class="text-purple-400 font-semibold">AI Research Engineer</span> and <span class="text-purple-400 font-semibold">Robotics Software Developer</span> pursuing my M.Sc. at Technical University of Munich.
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                        Currently working at <span class="text-purple-400">Quantum Systems</span>, developing algorithms for multi-drone operations, focusing on swarm coordination, path planning, and data fusion in ROS2 architecture.
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                        My research at <span class="text-purple-400">TUM's Autonomous Aerial Systems Lab</span> focuses on optimization-based trajectory generation for UAVs and swarm systems.
+                    </p>
+                    <p class="text-lg text-gray-400 leading-relaxed">
+                        Double major graduate from Sabancı University in Mechatronics Engineering and Computer Science with high honors.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-900/30 to-indigo-900/30 p-8 rounded-xl border border-purple-800/50 backdrop-blur-sm">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Education</h3>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-white">M.Sc. Mechatronics, Robotics and Biomechanical Engineering</h4>
+                            <p class="text-purple-400 font-medium">Technical University of Munich</p>
+                            <p class="text-gray-400 text-sm">Oct 2024 - Present</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-white">B.S. Mechatronics Engineering</h4>
+                            <p class="text-purple-400 font-medium">Sabancı University</p>
+                            <p class="text-gray-400 text-sm">GPA: 3.68/4.00 | Sept 2019 - June 2023</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-semibold text-white">B.S. Computer Science & Engineering</h4>
+                            <p class="text-purple-400 font-medium">Sabancı University (Double Major)</p>
+                            <p class="text-gray-400 text-sm">GPA: 3.58/4.00 | Sept 2020 - June 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research-tab" class="tab-content min-h-screen py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-5xl font-bold mb-16 section-title">Research</h2>
+            
+            <div class="mb-16">
+                <h3 class="text-3xl font-semibold text-white mb-8">Research Interests</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Autonomous Systems</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Swarm & Multi-Agent Systems</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Unmanned Aerial Vehicles (UAVs)</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Reinforcement Learning</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Motion Control</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Path Planning</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Computer Vision</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Machine Learning</span>
+                    <span class="skill-tag px-5 py-3 rounded-lg shadow-sm text-base">Deep Learning</span>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-3xl font-semibold text-white mb-8">Research Experience</h3>
+            </div>
+
+            <div class="space-y-8">
+                <!-- TUM Research -->
+                <div class="card-hover rounded-xl overflow-hidden">
+                    <div class="grid md:grid-cols-5 gap-0">
+                        <div class="md:col-span-2 relative h-64 md:h-auto">
+                            <img src="https://images.unsplash.com/photo-1508873696983-2dfd5fdb2e4e?q=80&w=1000" alt="UAV Research" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Ongoing</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-3 p-8">
+                            <h3 class="text-2xl font-semibold text-white mb-2">Optimization-Based Trajectory Generation for UAVs</h3>
+                            <p class="text-purple-400 font-medium mb-1">Technical University of Munich - Autonomous Aerial Systems Lab</p>
+                            <p class="text-gray-400 text-sm mb-6">Oct 2025 - Present | Semester Thesis</p>
+                            
+                            <ul class="space-y-3 text-gray-300 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Developing optimization-based trajectory generation methods for UAVs under dynamic and kinematic constraints</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Designing cost functions targeting trajectory smoothness, feasibility, and mission efficiency</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Extending it for future UAV swarm trajectory optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sabancı Path Planning Research -->
+                <div class="card-hover rounded-xl overflow-hidden">
+                    <div class="grid md:grid-cols-5 gap-0">
+                        <div class="md:col-span-2 relative h-64 md:h-auto">
+                            <img src="https://images.unsplash.com/photo-1563207153-f403bf289096?q=80&w=1000" alt="Path Planning Research" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Published</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-3 p-8">
+                            <h3 class="text-2xl font-semibold text-white mb-2">Local Path Planning with Dynamic Obstacle Avoidance</h3>
+                            <p class="text-purple-400 font-medium mb-1">Sabancı University</p>
+                            <p class="text-gray-400 text-sm mb-6">July 2023 - Sept 2024</p>
+                            
+                            <ul class="space-y-3 text-gray-300 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Engaged in collaborative research focused on path planning for unmanned ground vehicles in conjunction with unmanned aerial vehicles</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Operating in a dynamic environment, our path planning algorithm integrates both local and global strategies</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Research resulted in conference paper in conference IEEE IECON 2024</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="flex gap-3">
+                                <a href="#" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition text-sm font-medium">
+                                    <i class="fas fa-file-pdf mr-2"></i>Paper
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PURE Research -->
+                <div class="card-hover rounded-xl overflow-hidden">
+                    <div class="grid md:grid-cols-5 gap-0">
+                        <div class="md:col-span-2 relative h-64 md:h-auto">
+                            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000" alt="Deep Learning Research" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-gray-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Completed</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-3 p-8">
+                            <h3 class="text-2xl font-semibold text-white mb-2">Deep Learning for Bacteria Image Segmentation</h3>
+                            <p class="text-purple-400 font-medium mb-1">Sabancı University PURE (Program for Undergraduate Research)</p>
+                            <p class="text-gray-400 text-sm mb-6">Oct 2022 - Jan 2023 | Research Assistant</p>
+                            
+                            <ul class="space-y-3 text-gray-300 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Performed segmentation and mask operations on bacteria images for the deep-learning algorithm UNET</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="flex gap-3">
+                                <a href="#" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition text-sm font-medium">
+                                    <i class="fas fa-file-alt mr-2"></i>Report
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Robotics Lab -->
+                <div class="card-hover rounded-xl overflow-hidden">
+                    <div class="grid md:grid-cols-5 gap-0">
+                        <div class="md:col-span-2 relative h-64 md:h-auto">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000" alt="3D Printing Research" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-gray-600 text-white px-4 py-2 rounded-full text-sm font-semibold">Completed</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-3 p-8">
+                            <h3 class="text-2xl font-semibold text-white mb-2">Embedded 3D Printing Control System</h3>
+                            <p class="text-purple-400 font-medium mb-1">Sabancı University - Soft Robotics and Control Lab</p>
+                            <p class="text-gray-400 text-sm mb-6">Sept - Oct 2022 | Research Intern</p>
+                            
+                            <ul class="space-y-3 text-gray-300 mb-6">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
+                                    <span>Designed and controlled a 3D printer for the Embedded 3D Printing project</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="flex gap-3">
+                                <a href="#" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition text-sm font-medium">
+                                    <i class="fas fa-image mr-2"></i>Poster
+                                </a>
+                                <a href="#" class="px-5 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition text-sm font-medium">
+                                    <i class="fas fa-file-alt mr-2"></i>Report
+                                </a>
+                                <a href="#" class="px-5 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition text-sm font-medium">
+                                    <i class="fas fa-video mr-2"></i>Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications-tab" class="tab-content min-h-screen py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-5xl font-bold mb-16 section-title">Publications</h2>
+            
+            <div class="card-hover rounded-xl overflow-hidden">
+                <div class="grid md:grid-cols-5 gap-0">
+                    <div class="md:col-span-2 relative h-64 md:h-auto">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000" alt="Publication Preview" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <div class="bg-purple-600 text-white rounded-lg px-4 py-3 font-bold">
+                                <div class="text-2xl">2024</div>
+                                <div class="text-sm">IEEE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 p-8">
+                        <h3 class="text-2xl font-semibold text-white mb-3">
+                            Local Path Planning with Dynamic Obstacle Avoidance in Unstructured Environments
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            <span class="font-medium text-purple-400">Authors:</span> Okan Arif Güvenkaya, Selim Ahmet İz, Mustafa Ünel
+                        </p>
+                        <p class="text-purple-400 font-medium mb-6 text-lg">
+                            <i class="fas fa-book mr-2"></i>IEEE IECON 2024
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="#" class="inline-flex items-center px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition font-medium">
+                                <i class="fas fa-file-pdf mr-2"></i>PDF
+                            </a>
+                            <a href="#" class="inline-flex items-center px-5 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition font-medium">
+                                <i class="fas fa-quote-right mr-2"></i>BibTeX
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12 section-title">Projects</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Mobile Robot Project -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Mobile Robot Development for Intralogistics</h3>
+                        <p class="text-gray-600 text-sm mb-4">Sept - Oct 2025</p>
+                        <p class="text-gray-700 mb-4">
+                            Designed and implemented a complete mobile robot stack covering kinematics, perception, control, localization, 
+                            and navigation on a Raspberry Pi platform for structured indoor environments.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Applied PID control for low-level motion control</li>
+                                <li>Implemented Dijkstra algorithm for global path planning</li>
+                                <li>Developed OpenCV-based visual object detection</li>
+                                <li>Multi-sensor fusion (camera, ultrasonic, color sensors)</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Raspberry Pi</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">OpenCV</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">PID Control</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Path Planning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autonomous Driving Project -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Autonomous Driving in ROS-based Unity Simulation</h3>
+                        <p class="text-gray-600 text-sm mb-4">March - Aug 2025</p>
+                        <p class="text-gray-700 mb-4">
+                            Designed and implemented a complete autonomous driving stack in ROS, integrating perception, planning, 
+                            decision-making, and control modules in a Unity-based simulation environment.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Global waypoint processing and path planning</li>
+                                <li>Short-term goal selection algorithms</li>
+                                <li>Trajectory generation using TEB local planner</li>
+                                <li>Integration of perception and control systems</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">ROS</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Unity</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">TEB Planner</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">C++</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-video mr-2"></i>Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RL Humanoid Project -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Reinforcement Learning for Humanoid Motion Optimization</h3>
+                        <p class="text-gray-600 text-sm mb-4">March - Aug 2025</p>
+                        <p class="text-gray-700 mb-4">
+                            Modeled humanoid motion in MuJoCo using real gait data and implemented a PPO-based reinforcement learning 
+                            framework to track human joint angles and maintain stable locomotion.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Real gait data collection via motion capture system</li>
+                                <li>Processing in OpenSim (scaling, inverse kinematics, gait extraction)</li>
+                                <li>PPO-based RL framework in DeepMind's dm_control</li>
+                                <li>Multi-objective optimization (joint tracking, posture, control effort)</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">MuJoCo</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">OpenSim</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">PPO</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">dm_control</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Python</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-presentation mr-2"></i>Presentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Differential Drive Robot -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Vision Based Motion Control of Differential Drive Robot</h3>
+                        <p class="text-gray-600 text-sm mb-4">Feb - June 2023</p>
+                        <p class="text-gray-700 mb-4">
+                            Developed PID control for a differential drive robot with vision-based localization using ArUco markers, 
+                            achieving robust target tracking against external disturbances.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Mechanical design in Solidworks</li>
+                                <li>PID control implementation on Raspberry Pi</li>
+                                <li>ArUco marker-based position detection</li>
+                                <li>2D animation and simulation</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Raspberry Pi</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">OpenCV</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Solidworks</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">PID Control</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-file-alt mr-2"></i>Report
+                            </a>
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition text-sm">
+                                <i class="fas fa-video mr-2"></i>Videos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Haptic Interface -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Spherical Haptic Interface with Educational GUI</h3>
+                        <p class="text-gray-600 text-sm mb-4">Sept 2022 - June 2023</p>
+                        <p class="text-gray-700 mb-4">
+                            Designed and implemented a spherical haptic system for educational purposes, featuring multiple 
+                            representation methods including quaternions, rotation matrices, Euler angles, and axis-angle.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Haptic system design and implementation</li>
+                                <li>Multiple rotation representation methods</li>
+                                <li>User-friendly GUI with 3D rendering</li>
+                                <li>Real-time synchronization with physical system</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">MATLAB</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">App Designer</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Control Systems</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">3D Graphics</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-video mr-2"></i>Videos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traffic Violations -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Traffic Violation Detection via Computer Vision</h3>
+                        <p class="text-gray-600 text-sm mb-4">Sept 2022 - Jan 2023</p>
+                        <p class="text-gray-700 mb-4">
+                            Developed a computer vision system for detecting traffic violations of heavy vehicles using classical 
+                            CV techniques and motion analysis.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Hough line detection for lane marking</li>
+                                <li>Foreground detection and noise elimination</li>
+                                <li>Blob analysis for vehicle tracking</li>
+                                <li>Optical flow for motion estimation</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Python</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">OpenCV</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Computer Vision</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Optical Flow</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-file-alt mr-2"></i>Report
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sabancı Motorsports -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Sabancı Motorsports - Aerodynamics Department</h3>
+                        <p class="text-gray-600 text-sm mb-4">Feb 2020 - Jan 2022</p>
+                        <p class="text-gray-700 mb-4">
+                            Led the Aerodynamics department in designing and optimizing aerodynamic packages for Formula Student race car, 
+                            including CFD analysis and thermal management.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Department leadership (Sept 2021 - Jan 2022)</li>
+                                <li>Rear wing and front wing design optimization</li>
+                                <li>Battery box cooling via conjugate heat transfer</li>
+                                <li>CFD workshop organization for team members</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Solidworks</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">ANSYS</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">CFD</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Simscale</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#" class="inline-flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm">
+                                <i class="fas fa-video mr-2"></i>Workshop Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sabancı Aerospace -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-2"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Sabancı Aerospace Team - Rocket Competition</h3>
+                        <p class="text-gray-600 text-sm mb-4">July 2020 - Sept 2021</p>
+                        <p class="text-gray-700 mb-4">
+                            Contributed to the Sabancı Aerospace team for the TEKNOFEST Rocket Competition, performing comprehensive 
+                            engineering analyses for rocket design.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Key Contributions:</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+                                <li>Structural analysis of rocket components</li>
+                                <li>Thermal analysis for flight conditions</li>
+                                <li>CFD analysis for aerodynamic performance</li>
+                                <li>Team collaboration and competition preparation</li>
+                            </ul>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-900 mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">ANSYS</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">CFD</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Structural Analysis</span>
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs">Thermal Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12 section-title">Experience</h2>
+            
+            <div class="space-y-8">
+                <!-- Quantum Systems -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg shadow-md p-8 card-hover">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">Software Engineer / Swarm Developer</h3>
+                            <p class="text-purple-600 font-medium text-lg">Quantum Systems</p>
+                            <p class="text-gray-600">Gilching, Germany</p>
+                        </div>
+                        <span class="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium mt-2 md:mt-0">March 2025 - Present</span>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Develop and test algorithms for multi-drone operations in complex mission scenarios</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Optimize algorithms for overall mission performance including energy efficiency and coordination</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Use simulations for rapid development and then deploy to embedded Linux systems</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Find solutions in the areas of multi-vehicle routing, scheduling, and data fusion</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Integrate code into an existing ROS2 Nvidia architecture for real-time autonomous operations</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">ROS2</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">Python</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">C++</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">Embedded Linux</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">Multi-Agent Systems</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">UAVs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASELSAN -->
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg shadow-md p-8 card-hover">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-gray-900 mb-2">Engineering Intern</h3>
+                            <p class="text-purple-600 font-medium text-lg">ASELSAN</p>
+                            <p class="text-gray-600">Ankara, Turkey</p>
+                        </div>
+                        <span class="bg-gray-600 text-white px-4 py-2 rounded-lg font-medium mt-2 md:mt-0">July - Sept 2022</span>
+                    </div>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Conducted system identification for a 3-degree-of-freedom "SATCOM on the Move Antenna System"</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Designed and tuned controllers for precise antenna positioning and tracking</p>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-purple-600 mt-1 mr-3"></i>
+                            <p>Implemented and tested controller applications on physical hardware</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">MATLAB</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">Simulink</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">Control Systems</span>
+                            <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm">System Identification</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teaching Experience -->
+                <div class="mt-12">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Teaching Experience</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white border-2 border-purple-200 rounded-lg p-6 card-hover">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Learning Assistant - PROJ 201</h4>
+                            <p class="text-purple-600 font-medium mb-2">Sabancı University</p>
+                            <p class="text-gray-600 text-sm mb-4">Sept 2021 - Jan 2022</p>
+                            <div class="space-y-2 text-gray-700">
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Mentored students in Undergraduate Project Course</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Focused on "Aerodynamic Optimization of Racecar Using CFD"</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Conducted workshops on 3D CAD and CFD techniques</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-2 border-purple-200 rounded-lg p-6 card-hover">
+                            <h4 class="text-xl font-semibold text-gray-900 mb-2">Learning Assistant - ENS 209</h4>
+                            <p class="text-purple-600 font-medium mb-2">Sabancı University</p>
+                            <p class="text-gray-600 text-sm mb-4">July - Aug 2021</p>
+                            <div class="space-y-2 text-gray-700">
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Conducted office hours for student guidance</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Provided support on course materials and assignments</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-graduation-cap text-purple-600 mt-1 mr-3"></i>
+                                    <p class="text-sm">Assisted with laboratory work in CAD & Solid Modeling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12 section-title">Skills</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Programming & Tools -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-code text-purple-600 mr-3"></i>
+                        Programming & Tools
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Python</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">C++</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">ROS2</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">MATLAB</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">C#</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Unity</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">GitLab</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">MATLAB Simulink</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Raspberry Pi</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Arduino</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">LaTeX</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Java</span>
+                    </div>
+                </div>
+
+                <!-- Robotics & AI -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-robot text-purple-600 mr-3"></i>
+                        Robotics & AI
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Autonomous Robotics</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Swarm Systems</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">UAVs/Drones</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Path Planning</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Motion Control</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Reinforcement Learning</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Machine Learning</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Deep Learning</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Computer Vision</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Data Science</span>
+                    </div>
+                </div>
+
+                <!-- Simulation & Design -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-cogs text-purple-600 mr-3"></i>
+                        Simulation & Design
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Solidworks</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">ANSYS</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Simscale</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">CFD Analysis</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Structural Analysis</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Thermal Analysis</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">CAD Design</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">MuJoCo</span>
+                        <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">OpenSim</span>
+                    </div>
+                </div>
+
+                <!-- Languages & Soft Skills -->
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-comments text-purple-600 mr-3"></i>
+                        Languages & Soft Skills
+                    </h3>
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">Languages</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">Turkish</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Native</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700">English</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Soft Skills</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Leadership</span>
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Teamwork</span>
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Mentoring</span>
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Presentation</span>
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Adaptability</span>
+                            <span class="skill-tag bg-gray-100 px-4 py-2 rounded-lg text-gray-700 border border-gray-200">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Honors & Awards -->
+            <div class="mt-12 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg shadow-md p-8">
+                <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+                    <i class="fas fa-trophy text-purple-600 mr-3"></i>
+                    Honors & Awards
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-purple-600">
+                        <h4 class="font-semibold text-gray-900 mb-1">Dean's High Honor List</h4>
+                        <p class="text-purple-600 text-sm font-medium">Sabancı University</p>
+                        <p class="text-gray-600 text-sm">June 2020, Feb 2021, June 2021</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-purple-600">
+                        <h4 class="font-semibold text-gray-900 mb-1">Dean's Honor List</h4>
+                        <p class="text-purple-600 text-sm font-medium">Sabancı University</p>
+                        <p class="text-gray-600 text-sm">Feb 2020, Feb 2022</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-purple-600">
+                        <h4 class="font-semibold text-gray-900 mb-1">National University Exam Achievement Scholarship</h4>
+                        <p class="text-purple-600 text-sm font-medium">Sabancı University - $81,000</p>
+                        <p class="text-gray-600 text-sm">Rank: 1630th out of 2.5 million students</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-purple-600">
+                        <h4 class="font-semibold text-gray-900 mb-1">Certificate of Achievement</h4>
+                        <p class="text-purple-600 text-sm font-medium">Sabancı University School of Languages</p>
+                        <p class="text-gray-600 text-sm">Public Speaking Course - June 2019</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Download Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6 section-title inline-block">Curriculum Vitae</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Download my complete CV for a comprehensive overview of my education, research, experience, and achievements.
+            </p>
+            <a href="#" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <i class="fas fa-download mr-3 text-xl"></i>
+                Download CV (PDF)
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12 text-center section-title inline-block">Get In Touch</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-700 text-center mb-12">
+                    I'm always interested in discussing research opportunities, collaborations, or just connecting with fellow robotics enthusiasts. 
+                    Feel free to reach out!
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <a href="mailto:your.email@example.com" class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition card-hover flex items-center">
+                        <div class="bg-purple-100 rounded-full p-4 mr-4">
+                            <i class="fas fa-envelope text-purple-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Email</h3>
+                            <p class="text-purple-600">your.email@example.com</p>
+                        </div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition card-hover flex items-center">
+                        <div class="bg-blue-100 rounded-full p-4 mr-4">
+                            <i class="fab fa-linkedin text-blue-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">LinkedIn</h3>
+                            <p class="text-blue-600">Connect with me</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/yourusername" target="_blank" class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition card-hover flex items-center">
+                        <div class="bg-gray-100 rounded-full p-4 mr-4">
+                            <i class="fab fa-github text-gray-800 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">GitHub</h3>
+                            <p class="text-gray-600">View my code</p>
+                        </div>
+                    </a>
+
+                    <a href="https://scholar.google.com/yourprofile" target="_blank" class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition card-hover flex items-center">
+                        <div class="bg-red-100 rounded-full p-4 mr-4">
+                            <i class="fab fa-google text-red-600 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Google Scholar</h3>
+                            <p class="text-red-600">Research profile</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400 mb-4">
+                    © 2025 Okan Arif Güvenkaya. All rights reserved.
+                </p>
+                <div class="flex justify-center space-x-6 mb-4">
+                    <a href="https://scholar.google.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-google text-xl"></i>
+                    </a>
+                    <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">
+                    Designed with passion for robotics and innovation
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-purple-600');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-purple-600');
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+
