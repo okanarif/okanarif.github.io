@@ -378,11 +378,11 @@
                         
                         <div class="mt-8">
                             <h3 class="text-2xl font-semibold text-white mb-4">Research Interests</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="skill-tag px-4 py-2 rounded-lg text-sm">Autonomous Aerial Robotics</span>
-                                <span class="skill-tag px-4 py-2 rounded-lg text-sm">Perception-Based Real-Time Trajectory Planning in Unknown Environments</span>
-                                <span class="skill-tag px-4 py-2 rounded-lg text-sm">Decentralized Multi-Agent Planning and Coordination</span>
-                                <span class="skill-tag px-4 py-2 rounded-lg text-sm">Reinforcement Learning for Multi-Agent Decision-Making</span>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50 text-white">Autonomous Aerial Robotics</span>
+                                <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50 text-white">Perception-Based Real-Time Trajectory Planning in Unknown Environments</span>
+                                <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50 text-white">Decentralized Multi-Agent Planning and Coordination</span>
+                                <span class="bg-purple-600/30 backdrop-blur-sm px-5 py-3 rounded-full text-sm font-medium border border-purple-400/50 text-white">Reinforcement Learning for Multi-Agent Decision-Making</span>
                             </div>
                         </div>
                     </div>
@@ -430,7 +430,7 @@
                     <div class="card-hover rounded-xl overflow-hidden">
                         <div class="grid md:grid-cols-5 gap-0">
                             <div class="md:col-span-2 relative h-64 md:h-auto overflow-hidden bg-black">
-                                <video class="research-loop w-full h-full object-cover" autoplay muted loop playsinline preload="metadata"
+                                <video class="research-loop w-full h-full object-contain" autoplay muted loop playsinline preload="metadata"
                                        poster="images/research/thesis-overview-poster.jpg" width="1280" height="720"
                                        aria-label="Indoor flights of a LiDAR-equipped quadrotor through six obstacle layouts, with a live map inset">
                                     <source src="videos/research/thesis-overview.mp4" type="video/mp4">
@@ -440,26 +440,22 @@
                                 </div>
                             </div>
                             <div class="md:col-span-3 p-8">
-                                <h3 class="text-2xl font-semibold text-white mb-2">Online ADMM-Based Trajectory Planning for LiDAR-Equipped Quadrotors in Unknown Cluttered Environments</h3>
+                                <h3 class="text-2xl font-semibold text-white mb-2">LiDAR-Based Online UAV Trajectory Planning</h3>
                                 <p class="text-purple-400 font-medium mb-1">Technical University of Munich - Autonomous Aerial Systems Lab</p>
-                                <p class="text-gray-400 text-sm mb-6">2026 | Master's Thesis · Submitted Nov 2026</p>
+                                <p class="text-gray-400 text-sm mb-6">2026 | Master's Thesis</p>
 
                                 <ul class="space-y-3 text-gray-300 mb-6">
                                     <li class="flex items-start">
                                         <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
-                                        <span>Developed a LiDAR-based autonomous navigation framework with online optimization-based trajectory planning for UAVs in unknown environments, with no prior map and no external perception</span>
+                                        <span>Developed a LiDAR-based autonomous navigation framework with online optimization-based trajectory planning for quadrotors in unknown environments</span>
                                     </li>
                                     <li class="flex items-start">
                                         <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
-                                        <span>Built the online autonomy stack around the ACTOR solver (Pries et al., IROS 2026): LiDAR occupancy mapping, map-wide convex decomposition, frontier selection, replanning and trajectory hand-off in a parallel ROS 2 architecture</span>
+                                        <span>Built the online ROS 2 stack around the ACTOR solver: LiDAR occupancy mapping, map-wide convex decomposition, frontier selection and replanning</span>
                                     </li>
                                     <li class="flex items-start">
                                         <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
-                                        <span>Validated in simulation on four benchmark maps and in six indoor flights on a quadrotor carrying a Livox Mid-360 3D LiDAR</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-circle text-purple-500 text-xs mt-2 mr-3"></i>
-                                        <span>Part of ongoing research at the lab; detailed methodology and code are not shared at this stage</span>
+                                        <span>Validated in simulation and in six indoor flights with a Livox Mid-360 3D LiDAR; part of ongoing research, details not shared yet</span>
                                     </li>
                                 </ul>
 
@@ -468,12 +464,9 @@
                                     <div class="flex flex-wrap gap-2">
                                         <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">ROS 2</span>
                                         <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">C++</span>
-                                        <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">Python</span>
                                         <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">3D LiDAR</span>
                                         <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">Occupancy Mapping</span>
-                                        <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">Convex Decomposition</span>
                                         <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">Trajectory Optimization</span>
-                                        <span class="bg-black/50 px-4 py-2 rounded-lg shadow-sm text-sm border border-purple-800/30">PX4</span>
                                     </div>
                                 </div>
 
