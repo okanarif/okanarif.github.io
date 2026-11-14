@@ -185,3 +185,7 @@ For questions or suggestions about this template:
 
 Built with ❤️ for the robotics research community
 
+
+## Local-only material
+
+`MASTER_Thesis/` (thesis report, presentation, raw video) is git-ignored and must never be published. The Research page only links to the public thesis website and uses a compressed, muted loop derived from the raw video (`videos/research/`, poster in `images/research/`).
